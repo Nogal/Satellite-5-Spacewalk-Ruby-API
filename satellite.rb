@@ -759,27 +759,27 @@ module Satellite
             return system_list
 
             end
-        end
 
-        def self.listSystems()
-        #Description:
-        #    Returns a list of all servers visible to the user.
-        #Returns:
-        #    array:
-        #        struct - system
-        #            int "id"
-        #            string "name"
-        #            dateTime.iso8601 "last_checkin" - Last time server successfully checked in
+            def self.listSystems()
+            #Description:
+            #    Returns a list of all servers visible to the user.
+            #Returns:
+            #    array:
+            #        struct - system
+            #            int "id"
+            #            string "name"
+            #            dateTime.iso8601 "last_checkin" - Last time server successfully checked in
 
-            begin
-                system_list = $a_client.call('system.listSystems', $a_key)
-            rescue XMLRPC::FaultException => e
-                error_string = e.faultString.scan(/redstone.xmlrpc.XmlRpcFault: (.+$)/)
-                puts error_string
-                exit 2
+                begin
+                    system_list = $a_client.call('system.listSystems', $a_key)
+                rescue XMLRPC::FaultException => e
+                    error_string = e.faultString.scan(/redstone.xmlrpc.XmlRpcFault: (.+$)/)
+                    puts error_string
+                    exit 2
+                end
+
+                return system_list
             end
-
-            return system_list
         end
     end
 end
